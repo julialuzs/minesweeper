@@ -7,8 +7,8 @@ export class Board extends PureComponent {
 
         this.state = {
             grid: '',
-            rows: 40,
-            cols: 40
+            rows: '',
+            cols: ''
         }
     }
 

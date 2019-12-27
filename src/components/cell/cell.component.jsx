@@ -12,6 +12,21 @@ export class Cell extends PureComponent {
         }
     }
 
+    getValue() {
+        const { cell } = this.state.props;
+
+        if (cell.isMine) {
+            return "x";
+        }
+        if (!cell.isRevealed) {
+            return cell.isFlagged ? "f" : null;
+        }
+        if (cell.neighbour === 0) {
+            return null;
+        }
+        return cell.neighbour;
+    }
+
     render() {
         return <div></div>
     }
