@@ -58,12 +58,6 @@ Cell.prototype.countNeighbors = function () {
     this.neighborCount = neighborCount;
 }
 
-Cell.prototype.contains = function (x, y) {
-    var xIsValid = x > this.x && x < this.x + this.width;
-    var yIsValid = y > this.y && y < this.y + this.width;
-    return xIsValid && yIsValid;
-}
-
 Cell.prototype.reveal = function () {
 
     this.isRevealed = true;

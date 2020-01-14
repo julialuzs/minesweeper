@@ -19,21 +19,7 @@ function setup() {
         }
     }
 
-    let options = [];
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            options.push([i, j]);   
-        }
-    }
-
-    for (let n = 0; n < totalMines; n++) {
-        const index = floor(random(options.length));
-        let choice = options[index];
-        let i = choice[0];
-        let j = choice[1];
-        options.splice(index, 1);
-        grid[i][j].isMine = true;
-    }
+    generateRandomMines();
 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
@@ -51,6 +37,21 @@ function draw() {
     }
 }
 
+
+
+function mouseClicked() {
+
+    var x = floor(mouseX / w);
+    var y = floor(mouseY / w);
+
+    if (grid[x][y].isMine) {
+        return this.gameOver();
+    }
+
+    grid[x][y].reveal();
+
+}
+
 function gameOver() {
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
@@ -59,18 +60,21 @@ function gameOver() {
     }
 }
 
-function mousePressed() {
+function generateRandomMines() {
+    let options = [];
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < cols; j++) {
-            if (grid[i][j].contains(mouseX, mouseY)) {
-
-                if (grid[i][j].isMine) {
-                    return this.gameOver();
-                }
-
-                grid[i][j].reveal();
-            }
+            options.push([i, j]);
         }
+    }
+
+    for (let n = 0; n < totalMines; n++) {
+        const index = floor(random(options.length));
+        const choice = options[index];
+        const i = choice[0];
+        const j = choice[1];
+        options.splice(index, 1);
+        grid[i][j].isMine = true;
     }
 }
 
